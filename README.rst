@@ -14,12 +14,11 @@ Install it with pip (or easy_install, if that's how you roll)::
 
 In your project settings::
 
-    MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django-plop.middleware.PlopMiddleware',)
+    MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django_plop.middleware.PlopMiddleware',)
 
     PLOP_DIR = os.path.join(PROJECT_ROOT, 'plop') # will be created, defaults to /tmp/plop
 
-Then start your server with ``python manage.py --noreload`` (the ``--noreload``
-is very important.) Hit a few pages, and then start the plop viewer like so::
+Then start your server with ``python manage.py --noreload --nothreading`` (the ``--noreload --nothreading`` are very important.) Hit a few pages, and then start the plop viewer like so::
 
     python -m plop.viewer --datadir=plop
 
