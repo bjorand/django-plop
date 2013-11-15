@@ -30,8 +30,9 @@ class PlopMiddleware(object):
         'after the view executes, stop profiling'
         if hasattr(request, 'collector'): # 404s
             request.collector.stop()
-            with open(request.plop_filename, 'a') as plop_file:
-                plop_file.write(repr(dict(request.collector.stack_counts)))
+            if request.collector.samples_taken:
+                with open(request.plop_filename, 'w') as plop_file:
+                    plop_file.write(repr(dict(request.collector.stack_counts)))
 
         return response
 
