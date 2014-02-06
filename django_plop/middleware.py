@@ -22,9 +22,10 @@ class PlopMiddleware(object):
 
     def process_view(self, request, view_func, _, __):
         'process a single view, adding the collector'
-        request.collector = Collector()
-        request.collector.start()
-        request.plop_filename = self.get_filename(view_func)
+        if hasattr(view_func, '__name__'):
+            request.collector = Collector()
+            request.collector.start()
+            request.plop_filename = self.get_filename(view_func)
 
     def process_response(self, request, response):
         'after the view executes, stop profiling'
